@@ -1,0 +1,19 @@
+-- Consulta com JOIN múltiplo e agregação
+SELECT p.nome AS prato,
+       COUNT(ip.id_item) AS vezes_pedido,
+       SUM(ip.quantidade) AS total_quantidade,
+       AVG(pr.preco) AS preco_medio
+FROM PRATO p
+LEFT JOIN ITEM_PEDIDO ip ON p.id_prato = ip.id_prato
+GROUP BY p.id_prato, p.nome
+ORDER BY vezes_pedido DESC;
+
+-- Consulta com LIKE para busca parcial
+SELECT * FROM CLIENTE
+WHERE nome LIKE '%Silva%' OR nome LIKE '%Santos%';
+
+-- Consulta com BETWEEN para intervalo de preços
+SELECT nome, preco, categoria
+FROM PRATO
+WHERE preco BETWEEN 20.00 AND 50.00
+ORDER BY preco;
