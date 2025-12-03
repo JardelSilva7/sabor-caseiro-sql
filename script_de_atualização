@@ -1,0 +1,25 @@
+-- UPDATE 1: Atualizar status de uma mesa para ocupada
+UPDATE MESA
+SET status = 'ocupada'
+WHERE numero = 1;
+
+-- UPDATE 2: Atualizar preço de um prato
+UPDATE PRATO
+SET preco = 42.90
+WHERE nome = 'Feijoada Completa';
+
+-- UPDATE 3: Atualizar status de um pedido para entregue
+UPDATE PEDIDO
+SET status = 'entregue'
+WHERE id_pedido = 2;
+
+-- UPDATE 4: Atualizar telefone de um cliente
+UPDATE CLIENTE
+SET telefone = '(11) 93333-7777'
+WHERE nome = 'Carlos Oliveira';
+
+-- UPDATE 5: Atualizar subtotal de itens do pedido (exemplo de cálculo)
+UPDATE ITEM_PEDIDO ip
+JOIN PRATO pr ON ip.id_prato = pr.id_prato
+SET ip.subtotal = ip.quantidade * pr.preco
+WHERE ip.subtotal IS NULL;
