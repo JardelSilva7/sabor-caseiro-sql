@@ -1,0 +1,19 @@
+-- DELETE 1: Remover um item de pedido específico
+DELETE FROM ITEM_PEDIDO
+WHERE id_pedido = 3 AND id_prato = 5;
+
+-- DELETE 2: Remover pedidos cancelados (exemplo hipotético)
+DELETE FROM PEDIDO
+WHERE status = 'cancelado';
+
+-- DELETE 3: Remover mesas com capacidade menor que 2
+DELETE FROM MESA
+WHERE capacidade < 2;
+
+-- DELETE 4: Remover cliente sem pedidos (exemplo com subquery)
+DELETE FROM CLIENTE
+WHERE id_cliente NOT IN (SELECT DISTINCT id_cliente FROM PEDIDO);
+
+-- DELETE 5: Remover itens de pedido com quantidade zero
+DELETE FROM ITEM_PEDIDO
+WHERE quantidade <= 0;
