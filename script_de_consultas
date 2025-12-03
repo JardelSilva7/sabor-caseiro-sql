@@ -1,0 +1,35 @@
+-- Consulta 1: Listar todos os clientes ordenados por nome
+SELECT id_cliente, nome, telefone, endereco
+FROM CLIENTE
+ORDER BY nome;
+
+-- Consulta 2: Pedidos com status "em preparo" ou "recebido"
+SELECT p.id_pedido, p.data_hora, p.tipo, p.status,
+       c.nome AS cliente, f.nome AS funcionario
+FROM PEDIDO p
+JOIN CLIENTE c ON p.id_cliente = c.id_cliente
+JOIN FUNCIONARIO f ON p.id_funcionario = f.id_funcionario
+WHERE p.status IN ('em preparo', 'recebido')
+ORDER BY p.data_hora DESC;
+
+-- Consulta 3: Pratos mais caros que R$ 30,00
+SELECT nome, descricao, preco, categoria
+FROM PRATO
+WHERE preco > 30.00
+ORDER BY preco DESC;
+
+-- Consulta 4: Total gasto por cliente
+SELECT c.nome AS cliente,
+       SUM(ip.subtotal) AS total_gasto,
+       COUNT(p.id_pedido) AS qtd_pedidos
+FROM CLIENTE c
+JOIN PEDIDO p ON c.id_cliente = p.id_cliente
+JOIN ITEM_PEDIDO ip ON p.id_pedido = ip.id_pedido
+GROUP BY c.id_cliente, c.nome
+ORDER BY total_gasto DESC;
+
+-- Consulta 5: Mesas livres com capacidade para mais de 3 pessoas
+SELECT numero, capacidade, status
+FROM MESA
+WHERE status = 'livre' AND capacidade > 3
+ORDER BY capacidade DESC;
